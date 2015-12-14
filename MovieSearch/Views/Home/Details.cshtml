@@ -1,0 +1,47 @@
+﻿@using MovieSearch.Models
+@model MovieSearch.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="col-md-12">
+    <div class="col-md-5">
+        <br />
+        <br />
+        <img src="@Model.Poster"
+        <p style="font-size: 1.2em;">
+    </div>
+
+    <div class="col-md-7">
+        <br />
+        <h1>@Model.Title</h1>
+        <p><strong>Release Date: </strong>(@Model.Released) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@Model.Country)</p>
+        <p><strong>Rating: </strong>@Model.Rated&nbsp;&nbsp;&nbsp;&nbsp;<strong>Length: </strong>@Model.Runtime</p>
+        <p><strong>Genre: </strong>@Model.Genre&nbsp;&nbsp;&nbsp;&nbsp;<strong>Metascore: </strong>@Model.metascore / 100</p>
+        <br />
+        <p style="font-size: 1.2em;">
+        <p><strong>Director: </strong>@Model.Director</p>
+        <p><strong>Writer(s): </strong>@Model.Writer</p>
+        <p><strong>Actor(s): </strong>@Model.Actors</p>
+        <br />
+        <p style="font-size: 1.2em;">
+        <p><strong>Plot/Description: </strong>@Model.Plot</p>
+        <p style="font-size: 1.2em;">
+            <br />
+        <p><strong>Language(s): </strong>@Model.Language</p>
+        <p><strong>Awards: </strong>@Model.Awards</p>
+        <p></p>
+        <br />
+        <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
+            New Search
+        </a>
+        @*<a href="@Url.Action("SearchAgain")" class="btn btn-danger btn-md">
+                Back to Search Results
+            </a>*@
+    </div>
+</div>
+
+
+

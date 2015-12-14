@@ -1,0 +1,31 @@
+﻿@*@using MovieSearch.Models*@
+@using MovieSearch.Models
+@model List<MovieSearch.Models.Movie>
+@*@model MovieSearch.Models.SearchMovie*@
+@{
+    ViewBag.Title = "MovieSearch";
+}
+
+<h2>Search Results</h2>
+<br />
+@*@if (Model[0].Title.IsEmpty())
+{
+    <p>There were no movies found with those keyword(s).</p>
+    <br/>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
+        New Search
+    </a>
+}
+else
+{*@
+    <p>Please pick the correct movie.</p>
+    @foreach (Movie movie in Model)
+    {
+        <br />
+        <a href="@Url.Action("Details", new {id = movie.imdbID})">
+            @movie.Title&nbsp;(@movie.Year)
+        </a>
+    }
+}
+
+
