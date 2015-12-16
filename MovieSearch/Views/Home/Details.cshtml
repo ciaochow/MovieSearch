@@ -5,16 +5,15 @@
     ViewBag.Title = "Details";
 }
 
-
 <div class="col-md-12">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <br />
         <br />
-        <img src="@Model.Poster"
+        <img src="@Model.Poster" />
         <p style="font-size: 1.2em;">
     </div>
 
-    <div class="col-md-7">
+    <div class="col-md-6">
         <br />
         <h1>@Model.Title</h1>
         <p><strong>Release Date: </strong>(@Model.Released) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@Model.Country)</p>
@@ -37,6 +36,7 @@
         <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
             New Search
         </a>
+        @*// Future feature button which goes back to the previous search results*@
         @*<a href="@Url.Action("SearchAgain")" class="btn btn-danger btn-md">
                 Back to Search Results
             </a>*@

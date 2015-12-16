@@ -1,31 +1,50 @@
-﻿@*@using MovieSearch.Models*@
-@using MovieSearch.Models
-@model List<MovieSearch.Models.Movie>
-@*@model MovieSearch.Models.SearchMovie*@
+﻿@using MovieSearch.Models
+@model SearchMovie
 @{
     ViewBag.Title = "MovieSearch";
 }
 
 <h2>Search Results</h2>
 <br />
-@*@if (Model[0].Title.IsEmpty())
+@if (Model.contactServer)
 {
-    <p>There were no movies found with those keyword(s).</p>
-    <br/>
-    <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
-        New Search
-    </a>
+    <p>Contacting server...</p><br />
 }
-else
-{*@
-    <p>Please pick the correct movie.</p>
-    @foreach (Movie movie in Model)
+    @*If we get a response*@
+    @if (Model.serverResponse)
+            {
+                //if there are no results
+                if (Model.movies.Count == 0)
+                {
+            <p>There were no movies found with those keywords.</p>
+            <br />
+            <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
+                New Search
+            </a>
+        }
+        else
+        {
+            // if we get some actual results
+            <p>Please pick the correct movie.</p>
+            foreach (Movie movie in Model.movies)
+            {
+                <br />
+                <a href="@Url.Action("Details", new {id = movie.imdbID})">
+                    @movie.Title&nbsp;(@movie.Year)
+                </a>
+            }
+        }
+    }
+    else
     {
+        // if there is no server response (ie site down)
+        <p>Unable to contact server. Try again later...</p>
         <br />
-        <a href="@Url.Action("Details", new {id = movie.imdbID})">
-            @movie.Title&nbsp;(@movie.Year)
+        <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
+            Home
         </a>
     }
-}
+
+
 
 

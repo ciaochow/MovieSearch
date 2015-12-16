@@ -19,34 +19,55 @@ namespace MovieSearch.Models
         [Required(ErrorMessage = " - Cannot be blank.")]
         public string searchWord { get; set; }
 
-        public List<Movie> GetListOfMoviesByTitle(string searchword)
+        public bool contactServer { get; set; }
+        public bool serverResponse { get; set; }
+
+        public List<Movie> movies { get; set; }
+
+        public SearchMovie GetListOfMoviesByTitle(string searchword)
         {
             string movieResultsResponse = "";
+            SearchMovie searchMovie = new SearchMovie();
+            searchMovie.movies = new List<Movie>();
             HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?s=" + searchword + "&r=xml") as HttpWebRequest;
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            WebHeaderCollection header = response.Headers;
+            searchMovie.contactServer = true;
 
-            var encoding = ASCIIEncoding.ASCII;
-            using (var reader = new StreamReader(response.GetResponseStream(), encoding))
+            try
             {
-                movieResultsResponse = reader.ReadToEnd();
-            }
-
-            XmlDocument xml = new XmlDocument();
-            xml.LoadXml(movieResultsResponse);
-            XmlNodeList xnList = xml.SelectNodes("/root/result");
-            List<Movie> movieResults = new List<Movie>();
-            foreach (XmlNode xn in xnList)
-            {
-                movieResults.Add(new Movie
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                WebHeaderCollection header = response.Headers;
+                searchMovie.serverResponse = true;
+                var encoding = ASCIIEncoding.ASCII;
+                using (var reader = new StreamReader(response.GetResponseStream(), encoding))
                 {
-                    Title = xn.Attributes["Title"].Value,
-                    Year = xn.Attributes["Year"].Value,
-                    imdbID = xn.Attributes["imdbID"].Value,
-                    type = xn.Attributes["Type"].Value
-                });
+                    movieResultsResponse = reader.ReadToEnd();
+                }
+
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(movieResultsResponse);
+                XmlNodeList xnList = xml.SelectNodes("/root/result");
+                //List<Movie> movieResults = new List<Movie>();
+
+                foreach (XmlNode xn in xnList)
+                {
+
+                    searchMovie.movies.Add(new Movie
+                    {
+                        Title = xn.Attributes["Title"].Value,
+                        Year = xn.Attributes["Year"].Value,
+                        imdbID = xn.Attributes["imdbID"].Value,
+                        type = xn.Attributes["Type"].Value
+                    });
+                }
+                
             }
-            return movieResults;
+            catch (Exception ex)
+            {
+                // response = null; server may be down
+                searchMovie.serverResponse = false;
+            }
+            
+            return searchMovie;
         }
 
         public Movie GetMovieDetailsByMovieID(string movieID)

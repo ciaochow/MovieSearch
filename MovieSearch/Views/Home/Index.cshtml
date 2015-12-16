@@ -2,18 +2,15 @@
 @{
     ViewBag.Title = "Movie Search";
 }
-<br />
-<br/>
+<br /><br />
 <h3>Let's do a search for a movie. </h3>
-<br/>
+<br />
 @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "form-inline", role = "form" }))
 {
-    @Html.AntiForgeryToken()
     <div class="form-group">
-        <br/>
+        <br />
         <label>Enter some keywords (Ex: Rambo or Die Hard): </label>
         @Html.TextBox("searchword")
         <Button class="btn btn-success btn-sm">Submit</Button>
     </div>
-    
 }
