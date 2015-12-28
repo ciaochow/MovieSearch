@@ -1,5 +1,7 @@
 ﻿@using MovieSearch.Models
-@model MovieSearch.Models.Movie
+@*@model MovieSearch.Models.Movie*@
+@model SearchMovie
+
 
 @{
     ViewBag.Title = "Details";
@@ -9,37 +11,41 @@
     <div class="col-md-4">
         <br />
         <br />
-        <img src="@Model.Poster" />
+        <img src="@Model.movie.Poster" />
         <p style="font-size: 1.2em;">
     </div>
-
     <div class="col-md-6">
         <br />
-        <h1>@Model.Title</h1>
-        <p><strong>Release Date: </strong>(@Model.Released) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@Model.Country)</p>
-        <p><strong>Rating: </strong>@Model.Rated&nbsp;&nbsp;&nbsp;&nbsp;<strong>Length: </strong>@Model.Runtime</p>
-        <p><strong>Genre: </strong>@Model.Genre&nbsp;&nbsp;&nbsp;&nbsp;<strong>Metascore: </strong>@Model.metascore / 100</p>
+        <h1>@Model.movie.Title</h1>
+        <p><strong>Release Date: </strong>(@Model.movie.Released) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@Model.movie.Country)</p>
+        <p><strong>Rating: </strong>@Model.movie.Rated&nbsp;&nbsp;&nbsp;&nbsp;<strong>Length: </strong>@Model.movie.Runtime</p>
+        <p><strong>Genre: </strong>@Model.movie.Genre&nbsp;&nbsp;&nbsp;&nbsp;<strong>Metascore: </strong>@Model.movie.metascore / 100</p>
         <br />
         <p style="font-size: 1.2em;">
-        <p><strong>Director: </strong>@Model.Director</p>
-        <p><strong>Writer(s): </strong>@Model.Writer</p>
-        <p><strong>Actor(s): </strong>@Model.Actors</p>
+        <p><strong>Director: </strong>@Model.movie.Director</p>
+        <p><strong>Writer(s): </strong>@Model.movie.Writer</p>
+        <p><strong>Actor(s): </strong>@Model.movie.Actors</p>
         <br />
         <p style="font-size: 1.2em;">
-        <p><strong>Plot/Description: </strong>@Model.Plot</p>
+        <p><strong>Plot/Description: </strong>@Model.movie.Plot</p>
         <p style="font-size: 1.2em;">
-            <br />
-        <p><strong>Language(s): </strong>@Model.Language</p>
-        <p><strong>Awards: </strong>@Model.Awards</p>
+        <br />
+        <p><strong>Language(s): </strong>@Model.movie.Language</p>
+        <p><strong>Awards: </strong>@Model.movie.Awards</p>
         <p></p>
         <br />
-        <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-sm">
+        |
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-md">
             New Search
         </a>
-        @*// Future feature button which goes back to the previous search results*@
-        @*<a href="@Url.Action("SearchAgain")" class="btn btn-danger btn-md">
-                Back to Search Results
-            </a>*@
+        |
+        <a href="@Url.Action("Search", new {searchword = @Model.searchWord})" class="btn btn-primary btn-md">
+            Back to Search Results
+        </a>
+        |
+        <a target="_blank" href="http://www.imdb.com/title/@Model.movie.imdbID/">
+            <img alt="IMDB" src="http://techmaza.org/wp-content/uploads/2013/12/imdb1.jpg" height="100">
+        </a>
     </div>
 </div>
 

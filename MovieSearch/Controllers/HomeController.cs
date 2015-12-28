@@ -20,21 +20,21 @@ namespace MovieSearch.Controllers
         {
             //SearchMovie searchmovie = new SearchMovie();
             searchmovie.searchWord = searchword;
-            var list = searchmovie.GetListOfMoviesByTitle(searchword);
-            return View(list);
+            //var list = searchmovie.GetListOfMoviesByTitle(searchword);
+            searchmovie.movies = searchmovie.GetListOfMoviesByTitle(searchword).movies;
+            searchmovie.serverResponse = true;
+
+            return View(searchmovie);
         }
 
-        //public ActionResult SearchAgain()
-        //{
-        //    var list = searchmovie.GetListOfMoviesByTitle(searchmovie.searchWord);
-        //    return View("Search", list);
-        //}
-
-        public ActionResult Details(string id)
+        public ActionResult Details(string id, string searchword)
         {
             //SearchMovie searchmovie = new SearchMovie();
-            Movie movie = searchmovie.GetMovieDetailsByMovieID(id);
-            return View(movie);
+            //Movie movie = searchmovie.GetMovieDetailsByMovieID(id);
+            searchmovie.movie = searchmovie.GetMovieDetailsByMovieID(id);
+            searchmovie.searchWord = searchword;
+            // return View(movie);
+            return View(searchmovie);
         }
 
         public ActionResult About()

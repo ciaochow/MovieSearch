@@ -24,6 +24,8 @@ namespace MovieSearch.Models
 
         public List<Movie> movies { get; set; }
 
+        public Movie movie { get; set; }
+
         public SearchMovie GetListOfMoviesByTitle(string searchword)
         {
             string movieResultsResponse = "";
@@ -86,12 +88,9 @@ namespace MovieSearch.Models
             XmlDocument xml = new XmlDocument();
             xml.LoadXml(movieDetailsResponse);
             XmlNodeList xnList = xml.SelectNodes("/root/movie");
-            //Movie movieDetails = new Movie();
             Movie movieDetails = new Movie();
             foreach (XmlNode xn in xnList)
             {
-                //movieDetails.Add(new Movie
-
                 movieDetails.Title = xn.Attributes["title"].Value;
                 movieDetails.Year = xn.Attributes["year"].Value;
                 movieDetails.Rated = xn.Attributes["rated"].Value;
@@ -109,8 +108,6 @@ namespace MovieSearch.Models
                 movieDetails.metascore = xn.Attributes["metascore"].Value;
                 movieDetails.imdbID = xn.Attributes["imdbID"].Value;
                 movieDetails.type = xn.Attributes["type"].Value;
-                ;
-
             }
             return movieDetails;
         }

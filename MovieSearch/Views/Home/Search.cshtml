@@ -29,10 +29,15 @@
             foreach (Movie movie in Model.movies)
             {
                 <br />
-                <a href="@Url.Action("Details", new {id = movie.imdbID})">
+                <a href="@Url.Action("Details", new {id = movie.imdbID, searchword = @Model.searchWord})">
                     @movie.Title&nbsp;(@movie.Year)
                 </a>
             }
+            <br/>
+            <br/>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-sm">
+                New Search
+            </a>
         }
     }
     else
@@ -44,7 +49,3 @@
             Home
         </a>
     }
-
-
-
-
