@@ -55,10 +55,10 @@ namespace MovieSearch.Models
 
                     searchMovie.movies.Add(new Movie
                     {
-                        Title = xn.Attributes["Title"].Value,
-                        Year = xn.Attributes["Year"].Value,
+                        Title = xn.Attributes["title"].Value,
+                        Year = xn.Attributes["year"].Value,
                         imdbID = xn.Attributes["imdbID"].Value,
-                        type = xn.Attributes["Type"].Value
+                        type = xn.Attributes["type"].Value
                     });
                 }
                 
