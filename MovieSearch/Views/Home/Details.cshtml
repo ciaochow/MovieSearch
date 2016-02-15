@@ -1,5 +1,4 @@
 ﻿@using MovieSearch.Models
-@*@model MovieSearch.Models.Movie*@
 @model SearchMovie
 
 
@@ -11,8 +10,14 @@
     <div class="col-md-4">
         <br />
         <br />
-        <img src="@Model.movie.Poster" />
-        <p style="font-size: 1.2em;">
+        @if (Model.movie.Poster == "N/A" || Model.movie.Poster.IsEmpty())
+        {
+            <img alt="NoImageAvailable" src="../../Content/PosterPhotoNA.png" />
+        }
+        else
+        {
+            <img alt="PosterImage" style="width: 100%;" src="@Model.movie.Poster" />
+        }
     </div>
     <div class="col-md-6">
         <br />
@@ -28,20 +33,16 @@
                 <p><strong>Rating: </strong>@Model.movie.Rated&nbsp;&nbsp;&nbsp;&nbsp;<strong>Length: </strong>@Model.movie.Runtime</p>
                 <p><strong>Genre: </strong>@Model.movie.Genre&nbsp;&nbsp;&nbsp;&nbsp;<strong>Metascore: </strong>@Model.movie.metascore / 100</p>
                 <br />
-                <p style="font-size: 1.2em;">
                 <p><strong>Director: </strong>@Model.movie.Director</p>
                 <p><strong>Writer(s): </strong>@Model.movie.Writer</p>
                 <p><strong>Actor(s): </strong>@Model.movie.Actors</p>
                 <br />
-                <p style="font-size: 1.2em;">
                 <p><strong>Plot/Description: </strong>@Model.movie.Plot</p>
-                @*<p style="font-size: 1.2em;">
-                    <br />
-                *@<p><strong>Language(s): </strong>@Model.movie.Language</p>
+                <br />
+                <p><strong>Language(s): </strong>@Model.movie.Language</p>
                 <p><strong>Awards: </strong>@Model.movie.Awards</p>
             </div>
         </div>
-        @*<p></p>*@
         <br />
         |&nbsp;
         <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-md">
@@ -62,6 +63,3 @@
         </a>
     </div>
 </div>
-
-
-
