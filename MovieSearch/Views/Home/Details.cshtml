@@ -16,35 +16,49 @@
     </div>
     <div class="col-md-6">
         <br />
-        <h1>@Model.movie.Title</h1>
-        <p><strong>Release Date: </strong>(@Model.movie.Released) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@Model.movie.Country)</p>
-        <p><strong>Rating: </strong>@Model.movie.Rated&nbsp;&nbsp;&nbsp;&nbsp;<strong>Length: </strong>@Model.movie.Runtime</p>
-        <p><strong>Genre: </strong>@Model.movie.Genre&nbsp;&nbsp;&nbsp;&nbsp;<strong>Metascore: </strong>@Model.movie.metascore / 100</p>
         <br />
-        <p style="font-size: 1.2em;">
-        <p><strong>Director: </strong>@Model.movie.Director</p>
-        <p><strong>Writer(s): </strong>@Model.movie.Writer</p>
-        <p><strong>Actor(s): </strong>@Model.movie.Actors</p>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">
+                    <strong>@Model.movie.Title</strong>
+                </h1>
+            </div>
+            <div class="panel-body">
+                <p><strong>Release Date: </strong>(@Model.movie.Released) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@Model.movie.Country)</p>
+                <p><strong>Rating: </strong>@Model.movie.Rated&nbsp;&nbsp;&nbsp;&nbsp;<strong>Length: </strong>@Model.movie.Runtime</p>
+                <p><strong>Genre: </strong>@Model.movie.Genre&nbsp;&nbsp;&nbsp;&nbsp;<strong>Metascore: </strong>@Model.movie.metascore / 100</p>
+                <br />
+                <p style="font-size: 1.2em;">
+                <p><strong>Director: </strong>@Model.movie.Director</p>
+                <p><strong>Writer(s): </strong>@Model.movie.Writer</p>
+                <p><strong>Actor(s): </strong>@Model.movie.Actors</p>
+                <br />
+                <p style="font-size: 1.2em;">
+                <p><strong>Plot/Description: </strong>@Model.movie.Plot</p>
+                @*<p style="font-size: 1.2em;">
+                    <br />
+                *@<p><strong>Language(s): </strong>@Model.movie.Language</p>
+                <p><strong>Awards: </strong>@Model.movie.Awards</p>
+            </div>
+        </div>
+        @*<p></p>*@
         <br />
-        <p style="font-size: 1.2em;">
-        <p><strong>Plot/Description: </strong>@Model.movie.Plot</p>
-        <p style="font-size: 1.2em;">
-        <br />
-        <p><strong>Language(s): </strong>@Model.movie.Language</p>
-        <p><strong>Awards: </strong>@Model.movie.Awards</p>
-        <p></p>
-        <br />
-        |
+        |&nbsp;
         <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-md">
             New Search
         </a>
+        &nbsp;
         |
+        &nbsp;
         <a href="@Url.Action("Search", new {searchword = @Model.searchWord})" class="btn btn-primary btn-md">
             Back to Search Results
         </a>
+        &nbsp;
         |
+        &nbsp;
         <a target="_blank" href="http://www.imdb.com/title/@Model.movie.imdbID/">
-            <img alt="IMDB" src="http://techmaza.org/wp-content/uploads/2013/12/imdb1.jpg" height="100">
+            @*<img alt="IMDB" src="http://techmaza.org/wp-content/uploads/2013/12/imdb1.jpg" height="60">*@
+            <img alt="IMDB" src="http://www.eonline.com/eol_images/Entire_Site/2011919/300.imdb.cm.101911.jpg" height="60">
         </a>
     </div>
 </div>
