@@ -31,7 +31,7 @@ namespace MovieSearch.Models
             string movieResultsResponse = "";
             SearchMovie searchMovie = new SearchMovie();
             searchMovie.movies = new List<Movie>();
-            HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?s=" + searchword + "&r=xml") as HttpWebRequest;
+            HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?s=" + searchword + "&apikey=fa7144be" + "&r=xml") as HttpWebRequest;
             searchMovie.contactServer = true;
 
             try
@@ -47,10 +47,10 @@ namespace MovieSearch.Models
 
                 XmlDocument xml = new XmlDocument();
                 xml.LoadXml(movieResultsResponse);
-                XmlNodeList xnList = xml.SelectNodes("/root/result");
+                XmlNodeList xnList = xml.SelectNodes("/root");
                 //List<Movie> movieResults = new List<Movie>();
 
-                foreach (XmlNode xn in xnList)
+                foreach (XmlNode xn in xnList[0].ChildNodes)
                 {
 
                     searchMovie.movies.Add(new Movie
@@ -75,7 +75,7 @@ namespace MovieSearch.Models
         public Movie GetMovieDetailsByMovieID(string movieID)
         {
             string movieDetailsResponse = "";
-            HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?i=" + movieID + "&r=xml") as HttpWebRequest;
+            HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?i=" + movieID + "&apikey=fa7144be" + "&r=xml") as HttpWebRequest;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             WebHeaderCollection header = response.Headers;
 
